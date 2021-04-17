@@ -106,3 +106,9 @@ int sys_chprio (void)
 
   return chprio (pid,prio);
 }
+
+int
+sys_random(void)
+{
+  return random();
+}

@@ -25,6 +25,7 @@ int sleep(int);
 int uptime(void);
 int sps(void);
 int chprio(int pid, int priority);
+uint random(void);
 
 // ulib.c
 int stat(char*, struct stat*);

@@ -100,6 +100,7 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_sps(void);
 extern int sys_chprio(void);
+extern int sys_random(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -125,6 +126,7 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_sps]     sys_sps,
 [SYS_chprio]  sys_chprio,
+[SYS_random]  sys_random,
 };
 
 void
