@@ -6,7 +6,7 @@
 int
 main(int argc, char *argv[])
 {
-    int  k, n, id;
+    int  k, id;
     double i,x;
     x=0;
     id = 0;
