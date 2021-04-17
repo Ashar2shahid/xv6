@@ -92,6 +92,7 @@ OBJDUMP = $(TOOLPREFIX)objdump
 #CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -O2 -Wall -MD -ggdb -m32 -Werror -fno-omit-frame-pointer
 CFLAGS = -fno-pic -static -fno-builtin -fno-strict-aliasing -fvar-tracking -fvar-tracking-assignments -O0 -g -Wall -MD -gdwarf-2 -m32 -Werror -fno-omit-frame-pointer
 CFLAGS += $(shell $(CC) -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
+CFLAGS += -DLOTTERY
 ASFLAGS = -m32 -gdwarf-2 -Wa,-divide
 # FreeBSD ld wants ``elf_i386_fbsd''
 LDFLAGS += -m $(shell $(LD) -V | grep elf_i386 2>/dev/null)
@@ -194,6 +195,7 @@ UPROGS=\
 	_changeprio\
 	_nicetest\
 	_randomtest\
+	_lotterytest\
 
 fs.img: mkfs README.md example.txt $(UPROGS)
 	./mkfs fs.img README.md example.txt $(UPROGS)
@@ -275,7 +277,7 @@ qemu-vscode: fs.img xv6.img launch.json
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-	printf.c umalloc.c n_ex.c nicetest changeprio.c ps.c randomtest.c\
+	printf.c umalloc.c n_ex.c nicetest changeprio.c ps.c randomtest.c lotterytest.c\
 	README example.txt dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
 

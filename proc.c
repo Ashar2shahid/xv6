@@ -47,7 +47,7 @@ allocproc(void)
 found:
   p->state = EMBRYO;
   p->pid = nextpid++;
-  p->priority = 10;
+  p->priority = 4;
 
   release(&ptable.lock);
 
@@ -270,45 +270,100 @@ scheduler(void)
   struct proc *p , *p1;
   int foundproc = 1;
 
-  for(;;){
+  #ifndef LOTTERY
+    // Priority Based Scheduling
+    for(;;){
+      // Enable interrupts on this processor.
+      sti();
+
+      if (!foundproc) hlt();
+
+      foundproc = 0;
+
+      struct proc *highPriority;
+      // Loop over process table looking for process to run.
+      acquire(&ptable.lock);
+      for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+        if(p->state != RUNNABLE)
+          continue;
+
+        // Switch to chosen process.  It is the process's job
+        // to release ptable.lock and then reacquire it
+        // before jumping back to us.
+        highPriority = p;
+        for(p1 = ptable.proc; p1 < &ptable.proc[NPROC]; p1++){
+          if(p1->state != RUNNABLE)
+            continue;
+          if(highPriority->priority > p1->priority)
+            highPriority = p1;
+        }
+        p = highPriority;
+        foundproc = 1;
+        proc = p;
+        switchuvm(p);
+        p->state = RUNNING;
+        swtch(&cpu->scheduler, proc->context);
+        switchkvm();
+
+        // Process is done running for now.
+        // It should have changed its p->state before coming back.
+        proc = 0;
+      }
+      release(&ptable.lock);
+    }
+  #else
+    // Lottery Based Scheduling
+    for(;;){
     // Enable interrupts on this processor.
     sti();
 
-    if (!foundproc) hlt();
-
-    foundproc = 0;
-
-    struct proc *highPriority;
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
+
+    // get total number of tickets by iterating through every process
+    uint total = totaltickets();
+    if (total == 0) {
+      release(&ptable.lock);
+      continue;
+    }
+    // cprintf("total: %d\n", total);
+
+    // hold lottery
+    uint counter = 0; // used to track if we've found the winner yet
+    uint winner = randomrange(1, (int) total);
+    // cprintf("winner: %d\n", winner);
+
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
         continue;
 
+      int priority = p->priority;
+      counter += numtickets(priority);
+      if (counter < winner)
+        continue;
+
+      // cprintf("Winner: %s, [pid %d]\n", p->name, p->pid);
+
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
-      highPriority = p;
-      for(p1 = ptable.proc; p1 < &ptable.proc[NPROC]; p1++){
-        if(p1->state != RUNNABLE)
-          continue;
-        if(highPriority->priority > p1->priority)
-          highPriority = p1;
-      }
-      p = highPriority;
-      foundproc = 1;
       proc = p;
+
       switchuvm(p);
       p->state = RUNNING;
+
       swtch(&cpu->scheduler, proc->context);
       switchkvm();
 
       // Process is done running for now.
       // It should have changed its p->state before coming back.
       proc = 0;
+      break;
     }
     release(&ptable.lock);
-  }
+  }  
+#endif
+
 }
 
 // Enter scheduler.  Must hold only ptable.lock
@@ -519,4 +574,39 @@ chprio(int pid, int priority)
 
   return pid;
   
+}
+
+// Given a priority value, return the number of tickets this process holds
+uint
+numtickets(int priority)
+{
+  int tickets = 1;
+  int i;
+  for (i = 20; i > priority; i--) {
+    tickets = tickets * 2;
+  }
+  return tickets;
+}
+
+// Returns the sum of all tickets held by every RUNNABLE process.
+// 
+// Each RUNNABLE process has a priority val between 0 and 20.
+// The number of tickets they have is 2^nice.
+// Processes with the lowest priority, 20, would have 2^0 = 1 ticket.
+// Processes with the highest priority, 0, would have 2^20, 1048576 tickets.
+// totaltickets() returns the sum of all these.
+uint
+totaltickets(void)
+{
+  struct proc *p;
+  uint total = 0;
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
+    if(p->state != RUNNABLE)
+      continue;
+      int priority = p->priority;
+      total += numtickets(priority);
+      // cprintf("%d numtickets: %d\n", p->pid, numtickets(nice));
+  }
+  return total;
 }

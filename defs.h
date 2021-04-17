@@ -109,6 +109,8 @@ void            exit(void);
 int             fork(void);
 int             growproc(int);
 int             kill(int);
+uint            numtickets(int);
+uint            totaltickets(void);
 void            pinit(void);
 void            procdump(void);
 void            scheduler(void) __attribute__((noreturn));
