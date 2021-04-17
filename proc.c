@@ -313,6 +313,7 @@ scheduler(void)
       release(&ptable.lock);
     }
   #else
+    struct proc *p;
     // Lottery Based Scheduling
     for(;;){
     // Enable interrupts on this processor.
