@@ -118,6 +118,8 @@ void            userinit(void);
 int             wait(void);
 void            wakeup(void*);
 void            yield(void);
+int             sps(void);
+int             chprio(int pid, int priority);
 
 // swtch.S
 void            swtch(struct context**, struct context*);
