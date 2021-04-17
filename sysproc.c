@@ -91,9 +91,9 @@ sys_uptime(void)
 }
 
 int
-sys_cps(void)
+sys_sps(void)
 {
-  return cps();
+  return sps();
 }
 
 int sys_chprio (void)
