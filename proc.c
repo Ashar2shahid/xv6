@@ -268,12 +268,16 @@ void
 scheduler(void)
 {
   struct proc *p , *p1;
-  struct cpu *c = mycpu();
-  c->proc = 0;
+  int foundproc = 1;
 
   for(;;){
     // Enable interrupts on this processor.
     sti();
+
+    if (!foundproc) hlt();
+
+    foundproc = 0;
+
     struct proc *highPriority;
     // Loop over process table looking for process to run.
     acquire(&ptable.lock);
@@ -292,18 +296,18 @@ scheduler(void)
           highPriority = p1;
       }
       p = highPriority;
-      c->proc = p;
+      foundproc = 1;
+      proc = p;
       switchuvm(p);
       p->state = RUNNING;
-      swtch(&(c->scheduler), proc->context);
+      swtch(&cpu->scheduler, proc->context);
       switchkvm();
 
       // Process is done running for now.
       // It should have changed its p->state before coming back.
-      c->proc = 0;
+      proc = 0;
     }
     release(&ptable.lock);
-
   }
 }
 
