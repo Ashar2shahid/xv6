@@ -21,5 +21,6 @@
 #define SYS_mkdir  20
 #define SYS_close  21
 #define SYS_sps    22
-#define SYS_chprio 23
-#define SYS_random 24
+#define SYS_nice   23
+#define SYS_chprio 24
+#define SYS_random 25

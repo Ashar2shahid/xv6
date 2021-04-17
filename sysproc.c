@@ -96,12 +96,30 @@ sys_sps(void)
   return sps();
 }
 
-int sys_chprio (void)
+int
+sys_nice(void)
+{
+  int inc;
+
+  argint(0, &inc);
+
+  if (inc + proc->priority >= 20)
+    proc->priority = 19;
+  else if (inc + proc->priority <= -20)
+    proc->priority = -20;
+  else
+    proc->priority += inc;
+
+  return (int) proc->priority;
+}
+
+int 
+sys_chprio (void)
 {
   int pid,prio;
   if(argint(0, &pid) < 0)
     return -1;
-  if(argint(1, &prio) < 0)
+  if(argint(1, &prio) < -20)
     return -1;
 
   return chprio (pid,prio);

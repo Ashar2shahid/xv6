@@ -99,6 +99,7 @@ extern int sys_wait(void);
 extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_sps(void);
+extern int sys_nice(void);
 extern int sys_chprio(void);
 extern int sys_random(void);
 
@@ -127,6 +128,7 @@ static int (*syscalls[])(void) = {
 [SYS_sps]     sys_sps,
 [SYS_chprio]  sys_chprio,
 [SYS_random]  sys_random,
+[SYS_nice]    sys_nice,
 };
 
 void

@@ -191,7 +191,8 @@ UPROGS=\
 	_uniq\
 	_ps\
 	_n_ex\
-	_nice\
+	_changeprio\
+	_nicetest\
 	_randomtest\
 
 fs.img: mkfs README.md example.txt $(UPROGS)
@@ -274,7 +275,7 @@ qemu-vscode: fs.img xv6.img launch.json
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-	printf.c umalloc.c n_ex.c nice.c ps.c randomtest.c\
+	printf.c umalloc.c n_ex.c nicetest changeprio.c ps.c randomtest.c\
 	README example.txt dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
 

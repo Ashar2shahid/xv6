@@ -31,4 +31,6 @@ SYSCALL(sleep)
 SYSCALL(uptime)
 SYSCALL(sps)
 SYSCALL(chprio)
+SYSCALL(nice)
 SYSCALL(random)
+
