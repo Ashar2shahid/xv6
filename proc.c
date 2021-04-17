@@ -267,10 +267,11 @@ wait(void)
 void
 scheduler(void)
 {
-  struct proc *p , *p1;
-  int foundproc = 1;
 
   #ifndef LOTTERY
+
+    struct proc *p , *p1;
+    int foundproc = 1;
     // Priority Based Scheduling
     for(;;){
       // Enable interrupts on this processor.
