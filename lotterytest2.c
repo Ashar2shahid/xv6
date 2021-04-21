@@ -17,9 +17,9 @@ main(int argc, char *argv[])
   if (pid == 0) {
     while(1) {
       // set priority to 20
-      if (nice(0) <= 19)
+      if (nice(0) <= 17)
         nice(1); // increment nice by 1
-      if (nice(0) == 20) {
+      if (nice(0) == 18) {
         k++;
         printf(1, "Process 1 -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
       }
