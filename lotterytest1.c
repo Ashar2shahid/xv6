@@ -33,7 +33,7 @@ main(int argc, char *argv[])
         nice(1); // increment nice by 1
       if (nice(0) == 4) {
         k++;
-        printf(1, "Low Priority Process -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
+        printf(1, "High Priority Process -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
       }
     }
   }
