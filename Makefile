@@ -195,8 +195,9 @@ UPROGS=\
 	_changeprio\
 	_nicetest\
 	_randomtest\
-	_lotterytest\
 	_lotterytest1\
+	_lotterytest2\
+	_lotterytest3\
 
 fs.img: mkfs README.md example.txt $(UPROGS)
 	./mkfs fs.img README.md example.txt $(UPROGS)
@@ -278,7 +279,7 @@ qemu-vscode: fs.img xv6.img launch.json
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-	printf.c umalloc.c n_ex.c nicetest changeprio.c ps.c randomtest.c lotterytest.c lotterytest1.c\
+	printf.c umalloc.c n_ex.c nicetest changeprio.c ps.c randomtest.c lotterytest1.c lotterytest2.c lotterytest3.c\
 	README example.txt dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
 

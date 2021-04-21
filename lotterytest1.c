@@ -3,12 +3,11 @@
 
 // test the lottery ticket scheduler
 // This test makes sure that the process with the highest priority gets to run the most.
-// This test also makes sure that processes with a priority of 0 (lowest possible) still gets to run.
 
 int
 main(int argc, char *argv[])
 {
-  printf(1, "lottery test\n");
+  printf(1, "lottery test 1\n");
 
   // fork into 2 processes with different niceness values.
   int k = 0;
