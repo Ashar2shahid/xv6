@@ -585,7 +585,7 @@ numtickets(int priority)
   int tickets = 1;
   int i;
   for (i = 20; i > priority; i--) {
-    tickets = tickets + 1
+    tickets = tickets + 1;
   }
   return tickets;
 }
