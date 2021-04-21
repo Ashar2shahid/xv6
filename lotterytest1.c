@@ -17,10 +17,10 @@ main(int argc, char *argv[])
   pid = fork();
   if (pid == 0) {
     while(1) {
-      // set priority to 9
-      if (nice(0) <= 8)
+      // set priority to 11
+      if (nice(0) <= 10)
         nice(1); // increment nice by 1
-      if (nice(0) == 9) {
+      if (nice(0) == 11) {
         k++;
         printf(1, "Low Priority Process -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
       }
@@ -28,10 +28,10 @@ main(int argc, char *argv[])
   }
   else {
     while(1) {
-      // set priority to 4
-      if (nice(0) <= 3)
+      // set priority to 6
+      if (nice(0) <= 5)
         nice(1); // increment nice by 1
-      if (nice(0) == 4) {
+      if (nice(0) == 6) {
         k++;
         printf(1, "High Priority Process -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
       }
