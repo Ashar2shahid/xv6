@@ -7,6 +7,7 @@ main(int argc, char *argv[])
   printf(1, "nice test\n");
 
   int oval = nice(0);
+  printf(1,"oval value is %d", oval);
   int nval;
   if (oval < 0) {
     nval = nice(10);
