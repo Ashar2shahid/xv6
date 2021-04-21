@@ -40,7 +40,7 @@ main(int argc, char *argv[])
   if (pid == 0) {
     while(1) {
       // keep priority between 2 and 5
-      if (nice(0) <= 2)
+      if (nice(0) <= 0)
         nice(5); // increment nice by 5
       k++;
       printf(1, "HIGH - ticks - %d \n",k);
