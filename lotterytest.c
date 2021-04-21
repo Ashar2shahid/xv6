@@ -11,6 +11,7 @@ main(int argc, char *argv[])
   printf(1, "lottery test\n");
 
   // fork into 4 processes with different niceness values.
+  int k = 0;
   int pid;
 
   pid = fork();
@@ -18,8 +19,9 @@ main(int argc, char *argv[])
     while(1) {
       // keep priority between 12 and 15
       if (nice(0) <= 12)
-        nice(2); // increment nice by 2
-      printf(1, "LOW\n");
+        nice(5); // increment nice by 5
+      k++;
+      printf(1, "LOW - ticks - %d \n",k);
     }
   }
 
@@ -28,8 +30,9 @@ main(int argc, char *argv[])
     while(1) {
       // keep priority between 7 and 10
       if (nice(0) <= 7)
-        nice(2); // increment nice by 2
-      printf(1, "MEDIUM\n");
+        nice(5); // increment nice by 5
+      k++;
+      printf(1, "MEDIUM - ticks - %d \n",k);
     }
   }
 
@@ -38,16 +41,18 @@ main(int argc, char *argv[])
     while(1) {
       // keep priority between 2 and 5
       if (nice(0) <= 2)
-        nice(2); // increment nice by 2
-      printf(1, "HIGH\n");
+        nice(5); // increment nice by 5
+      k++;
+      printf(1, "HIGH - ticks - %d \n",k);
     }
   }
 
   while(1) {
       // keep priority between 17 and 20
       if (nice(0) <= 17)
-        nice(2); // increment nice by 2
-    printf(1, "BAD\n");
+        nice(5); // increment nice by 5
+    k++;
+    printf(1, "BAD - ticks - %d \n",k);
   }
 
   exit();
