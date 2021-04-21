@@ -585,7 +585,7 @@ numtickets(int priority)
   int tickets = 1;
   int i;
   for (i = 20; i > priority; i--) {
-    tickets = tickets * 2;
+    tickets = tickets + 1
   }
   return tickets;
 }
@@ -593,9 +593,9 @@ numtickets(int priority)
 // Returns the sum of all tickets held by every RUNNABLE process.
 // 
 // Each RUNNABLE process has a priority val between 0 and 20.
-// The number of tickets they have is 2^nice.
-// Processes with the lowest priority, 20, would have 2^0 = 1 ticket.
-// Processes with the highest priority, 0, would have 2^20, 1048576 tickets.
+// The number of tickets they have is 20 - nice + 1.
+// Processes with the lowest priority, 20, would have 20 - 20 + 1 = 1 ticket.
+// Processes with the highest priority, 0, would have 20 - 0 + 1, 21 tickets.
 // totaltickets() returns the sum of all these.
 uint
 totaltickets(void)
