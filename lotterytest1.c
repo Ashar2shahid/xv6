@@ -12,30 +12,38 @@ main(int argc, char *argv[])
   // fork into 2 processes with different niceness values.
   int k = 0;
   int pid;
+  int i;
 
-  pid = fork();
-  if (pid == 0) {
-    while(1) {
-      // set priority to 11
-      if (nice(0) <= 10)
-        nice(1); // increment nice by 1
-      if (nice(0) == 11) {
-        k++;
-        printf(1, "Low Priority Process -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
+  for (i=0;i<16;i++){
+    pid = fork();
+    if (pid == 0) {
+      while(1) {
+        // set priority to 11
+        if (nice(0) <= 10)
+          nice(1); // increment nice by 1
+        if (nice(0) == 11) {
+          k++;
+          printf(1, "Low Priority Process %d -Priority=%d -tickets= %d -ticks=%d \n",i,nice(0),20-nice(0)+1,k);
+        }
       }
     }
   }
-  else {
-    while(1) {
+
+  for (i=16;i<32;i++){
+    pid = fork();
+    if (pid == 0) {
+      while(1) {
       // set priority to 6
       if (nice(0) <= 5)
         nice(1); // increment nice by 1
       if (nice(0) == 6) {
         k++;
-        printf(1, "High Priority Process -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
+        printf(1, "High Priority Process %d -Priority=%d -tickets= %d -ticks=%d \n",i,nice(0),20-nice(0)+1,k);
+        }
       }
     }
   }
+
 
   exit();
 }
