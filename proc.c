@@ -333,7 +333,7 @@ scheduler(void)
     // hold lottery
     uint counter = 0; // used to track if we've found the winner yet
     uint winner = randomrange(1, (int) total);
-    // cprintf("winner: %d\n", winner);
+    cprintf("winner: %d\n", winner);
 
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
       if(p->state != RUNNABLE)
@@ -608,7 +608,7 @@ totaltickets(void)
       continue;
       int priority = p->priority;
       total += numtickets(priority);
-      // cprintf("%d numtickets: %d\n", p->pid, numtickets(nice));
+      cprintf("%d numtickets: %d\n", p->pid, numtickets(priority));
   }
   return total;
 }
