@@ -17,10 +17,10 @@ main(int argc, char *argv[])
   pid = fork();
   if (pid == 0) {
     while(1) {
-      // set priority to 18
-      if (nice(0) <= 17)
+      // set priority to 11
+      if (nice(0) <= 10)
         nice(1); // increment nice by 1
-      if (nice(0) == 18) {
+      if (nice(0) == 11) {
         k++;
         z += 3.14 * 89.9; // occupy cpu time
         if(k%1000000 == 0)
@@ -32,10 +32,10 @@ main(int argc, char *argv[])
   pid = fork();
   if (pid == 0) {
     while(1) {
-      // set priority to 18
-      if (nice(0) <= 17)
+      // set priority to 11
+      if (nice(0) <= 10)
         nice(1); // increment nice by 1
-      if (nice(0) == 18) {
+      if (nice(0) == 11) {
         k++;
         z += 3.14 * 89.9; // occupy cpu time
         if(k%1000000 == 0)
@@ -47,10 +47,10 @@ main(int argc, char *argv[])
   pid = fork();
   if (pid == 0) {
     while(1) {
-      // set priority to 18
-      if (nice(0) <= 17)
+      // set priority to 11
+      if (nice(0) <= 10)
         nice(1); // increment nice by 1
-      if (nice(0) == 18) {
+      if (nice(0) == 11) {
         k++;
         z += 3.14 * 89.9; // occupy cpu time
         if(k%1000000 == 0)
@@ -61,10 +61,10 @@ main(int argc, char *argv[])
   pid = fork();
   if (pid == 0) {
     while(1) {
-      // set priority to 16
-      if (nice(0) <= 15)
+      // set priority to 11
+      if (nice(0) <= 10)
         nice(1); // increment nice by 1
-      if (nice(0) == 16) {
+      if (nice(0) == 11) {
         k++;
         z += 3.14 * 89.9; // occupy cpu time
         if(k%1000000 == 0)
@@ -90,10 +90,10 @@ main(int argc, char *argv[])
  pid = fork();
  if (pid == 0) {
     while(1) {
-      if (nice(0) <= 4)
+      if (nice(0) <= 10)
         nice(1); // set priority to 5
         if (k == 10000000)
-            nice(8); // Half the number of tickets
+            nice(5); // Half the number of tickets
         z += 3.14 * 89.9; // occupy cpu time
         k++;
         if(k%1000000 == 0)
