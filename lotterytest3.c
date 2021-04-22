@@ -16,8 +16,8 @@ main(int argc, char *argv[])
   pid = fork();
   if (pid == 0) {
     while(1) {
-        if (k == 1000)
-            nice(10); // Half the number of tickets
+      if (nice(0) <= 4)
+        nice(1); // set priority to 5
         k++;
         printf(1, "Process 1 -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
     }
@@ -26,6 +26,10 @@ main(int argc, char *argv[])
  pid = fork();
  if (pid == 0) {
     while(1) {
+      if (nice(0) <= 4)
+        nice(1); // set priority to 5
+        if (k == 1000)
+            nice(8); // Half the number of tickets
         k++;
         printf(1, "Process 2 -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
     }
