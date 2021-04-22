@@ -9,12 +9,13 @@ main(int argc, char *argv[])
 {
   printf(1, "lottery test 1\n");
 
-  // fork into 2 processes with different niceness values.
+  // fork into 8 processes with different niceness values.
   int k = 0;
+  double z = 0;
   int pid;
   int i;
 
-  for (i=0;i<16;i++){
+  for (i=0;i<4;i++){
     pid = fork();
     if (pid == 0) {
       while(1) {
@@ -23,13 +24,15 @@ main(int argc, char *argv[])
           nice(1); // increment nice by 1
         if (nice(0) == 11) {
           k++;
+          z += 3.14 * 89.9; // occupy cpu time
+          if(k%1000000 == 0)
           printf(1, "Low Priority Process %d -Priority=%d -tickets= %d -ticks=%d \n",i,nice(0),20-nice(0)+1,k);
         }
       }
     }
   }
 
-  for (i=16;i<32;i++){
+  for (i=4;i<8;i++){
     pid = fork();
     if (pid == 0) {
       while(1) {
@@ -38,6 +41,8 @@ main(int argc, char *argv[])
         nice(1); // increment nice by 1
       if (nice(0) == 6) {
         k++;
+        z += 3.14 * 89.9; // occupy cpu time
+        if(k%1000000 == 0)
         printf(1, "High Priority Process %d -Priority=%d -tickets= %d -ticks=%d \n",i,nice(0),20-nice(0)+1,k);
         }
       }
