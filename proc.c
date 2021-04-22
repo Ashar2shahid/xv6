@@ -608,7 +608,7 @@ totaltickets(void)
       continue;
       int priority = p->priority;
       total += numtickets(priority);
-      // cprintf("%d numtickets: %d\n", p->pid, numtickets(nice));
+      cprintf("%d numtickets: %d\n", p->pid, numtickets(priority));
   }
   return total;
 }
