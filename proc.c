@@ -336,7 +336,7 @@ scheduler(void)
     // cprintf("winner: %d\n", winner);
 
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->state != RUNNABLE || p->state != RUNNING)
+      if(p->state != RUNNABLE && p->state != RUNNING)
         continue;
 
       int priority = p->priority;
@@ -606,7 +606,7 @@ totaltickets(void)
   uint total = 0;
 
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if(p->state != RUNNABLE || p->state != RUNNING)
+    if(p->state != RUNNABLE && p->state != RUNNING)
       continue;
       int priority = p->priority;
       total += numtickets(priority);
