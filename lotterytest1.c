@@ -9,7 +9,7 @@ main(int argc, char *argv[])
 {
   printf(1, "lottery test 1\n");
 
-  // fork into 8 processes with different niceness values.
+  // fork into 8 processes with 4 proccess having 10 tickets and 4 proccess having 15 tickets
   int k = 0;
   double z = 0;
   int pid;
