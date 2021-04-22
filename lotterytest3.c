@@ -19,7 +19,7 @@ main(int argc, char *argv[])
       if (nice(0) <= 4)
         nice(1); // set priority to 5
         k++;
-        if(k%100 == 0)
+        if(k%1000 == 0)
         printf(1, "Process 1 -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
     }
   }
@@ -29,10 +29,10 @@ main(int argc, char *argv[])
     while(1) {
       if (nice(0) <= 4)
         nice(1); // set priority to 5
-        if (k == 1000)
+        if (k == 10000)
             nice(8); // Half the number of tickets
         k++;
-        if(k%100 == 0)
+        if(k%1000 == 0)
         printf(1, "Process 2 -Priority=%d -tickets= %d -ticks=%d \n",nice(0),20-nice(0)+1,k);
     }
   }
