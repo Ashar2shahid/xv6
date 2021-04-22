@@ -328,7 +328,7 @@ scheduler(void)
       release(&ptable.lock);
       continue;
     }
-    cprintf("total: %d\n", total);
+    // cprintf("total: %d\n", total);
 
     // hold lottery
     uint counter = 0; // used to track if we've found the winner yet
