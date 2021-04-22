@@ -332,7 +332,7 @@ At every process scheduling interval run a lottery and find a winner based on th
 
 ## Scheduler Test Cases
 
-### Test Case 1 
+### Test Case 1 (run with lotterytest1)
 
 In this test case we ran 4 processes with 10 tickets each and 4 processes with 15 tickets each for 2 minutes
 
@@ -356,7 +356,7 @@ We observed the following
 The Percentage Ticks are similar to the % Tickets which means the scheduler is schduling correctly
 
 
-### Test Case 2 
+### Test Case 2 (run with lotterytest2)
 In this Test case we ran 6 processes with 3,3,3,5,10 and 15 tickets respectively for 2 minutes
 
 We observed the following
@@ -375,7 +375,7 @@ We observed the following
 The percentage Ticks are inline with the expected outcome, if we increase the number of processes and run it for longer periods of time it will converge to values similar to % Tickets, therefore the scheduler is schduling correctly 
 
 
-## Test Case 3
+## Test Case 3 (run with lotterytest3)
 
 In this Test case we run 6 processes with 10 tickets each, when process 6 reaches 10M ticks we reduce the number of tickets to 2. 
 
