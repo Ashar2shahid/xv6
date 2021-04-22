@@ -93,7 +93,7 @@ main(int argc, char *argv[])
       if (nice(0) <= 10)
         nice(1); // set priority to 5
         if (k == 10000000)
-            nice(5); // Half the number of tickets
+            nice(8); // Half the number of tickets
         z += 3.14 * 89.9; // occupy cpu time
         k++;
         if(k%1000000 == 0)
