@@ -328,15 +328,15 @@ scheduler(void)
       release(&ptable.lock);
       continue;
     }
-    cprintf("total: %d\n", total);
+    // cprintf("total: %d\n", total);
 
     // hold lottery
     uint counter = 0; // used to track if we've found the winner yet
     uint winner = randomrange(1, (int) total);
-    cprintf("winner: %d\n", winner);
+    // cprintf("winner: %d\n", winner);
 
     for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->state != RUNNABLE && p->state != RUNNING)
+      if(p->state != RUNNABLE)
         continue;
 
       int priority = p->priority;
@@ -349,8 +349,6 @@ scheduler(void)
       // Switch to chosen process.  It is the process's job
       // to release ptable.lock and then reacquire it
       // before jumping back to us.
-      if(p->state == RUNNING)
-        break; // continue running the process if its the winner
       proc = p;
 
       switchuvm(p);
@@ -606,7 +604,7 @@ totaltickets(void)
   uint total = 0;
 
   for(p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-    if(p->state != RUNNABLE && p->state != RUNNING)
+    if(p->state != RUNNABLE)
       continue;
       int priority = p->priority;
       total += numtickets(priority);
